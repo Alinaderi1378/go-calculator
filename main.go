@@ -12,17 +12,17 @@ import (
 func main() {
 	run := true
 
-	fmt.Printf("این یک پروژه ی ماشین حساب است.\nتوابعی که میتوان با این ماشین حساب انجام داد : عملیات جمع وتفریق و ضرب و تقسیم و سینوس و کو\nلطفابرای خروج کلید q  را بزنید.\n--------------------------------------\n")
+	fmt.Printf("Hi there is a simple command Line calculator for IAUT \n this program will support this oprators \n addition \n subtract \n multiplication \n multiplication \n divide \n sin x \n cos x \n tan x \n log x \n pow x \n sqrt x \n---------------------------------------------------------------- \n")
 
 	// reads user input
 	reader := bufio.NewReader(os.Stdin)
 	for run {
-		fmt.Printf("لطفا یک عدد را وارد کنید: ")
+		fmt.Printf("please enter num1 :")
 		first, _ := reader.ReadString('\n')
 
 		var trimmed = trim(first, "\r\n")
 		if shouldQuit(trimmed) {
-			fmt.Printf("خروج")
+			fmt.Printf("Quitting...")
 			os.Exit(0)
 		}
 		num1, _ := strconv.ParseFloat(trimmed, 64)
@@ -32,12 +32,12 @@ func main() {
 
 		var optrim = trim(op, "\r\n")
 		if shouldQuit(optrim) {
-			fmt.Printf("خروج")
+			fmt.Printf("Quitting...")
 			os.Exit(0)
 		}
 		var vo = validOp(optrim)
 		for !vo {
-			fmt.Printf("عملگر ناشناخته، لطفا یک عملگرجدید را وارد کنید ")
+			fmt.Printf("invalid op , please enter a valid operand :")
 			op, _ := reader.ReadString('\n')
 			optrim = trim(op, "\r\n")
 			if shouldQuit(optrim) {
@@ -48,22 +48,22 @@ func main() {
 		}
 
 		if optrim == "sin" || optrim == "cos" || optrim == "tan" || optrim == "log" || optrim == "sqrt" {
-			fmt.Printf("جواب: " + callCalculation_once(optrim, num1) + "\n--------------------------------------\n")
+			fmt.Printf("answer: " + callCalculation_once(optrim, num1) + "\n--------------------------------------\n")
 
 		} else {
 
-			fmt.Printf("عدد دوم را وارد کنید: ")
+			fmt.Printf("plese enter num2 : ")
 			second, _ := reader.ReadString('\n')
 
 			// حذف خطوط جدید با تریم
 			trimmed = trim(second, "\r\n")
 			if shouldQuit(trimmed) {
-				fmt.Printf("خروج")
+				fmt.Printf("exit")
 				os.Exit(0)
 			}
 			num2, _ := strconv.ParseFloat(trimmed, 64)
 
-			fmt.Printf("جواب: " + callCalculation_twice(optrim, num1, num2) + "\n--------------------------------------\n")
+			fmt.Printf("answer: " + callCalculation_twice(optrim, num1, num2) + "\n--------------------------------------\n")
 		}
 
 	}
